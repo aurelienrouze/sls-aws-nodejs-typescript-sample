@@ -1,0 +1,22 @@
+app: hello-world-app
+service: hello-world
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: local
+  region: eu-central-1
+  resourcePolicy:
+    - Effect: Allow
+      Principal: '*'
+      Action: execute-api:Invoke
+      Resource:
+        - execute-api:/*/*/*
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+functions:
+  hello:
+    handler: src/handler.helloWorld
